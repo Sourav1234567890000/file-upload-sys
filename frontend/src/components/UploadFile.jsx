@@ -16,25 +16,35 @@ const UploadFile = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState({});
 
-  function mockUpload(e) {
+  async function mockUpload(e) {
     const file = e.target.files[0];
     setSelectedFile(file);
     setLoading(true);
     console.log(file);
 
-    // simulate API delay
-    setTimeout(() => {
-      setResponse({
-        status: "success",
-        message: "Document verified",
-        score: Math.floor(70 + Math.random() * 25),
-      });
-      setLoading(false);
-      console.log(response);
-    }, 2000);
+    const formData = new FormData();
+
+    // append file
+    formData.append("file", file);
+
+    // call API
+    const res = await fetch("http://localhost:5000/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    setResponse(data);
+
+    setLoading(false);
   }
+
+  // append files
   return (
-    <>{loading ? <Loader /> : <input type="file" onChange={mockUpload} />}</>
+    <>
+      {loading ? <Loader /> : <input type="file" onChange={mockUpload} />}
+      {response && <p>{response.message}</p>}
+    </>
   );
 };
 
