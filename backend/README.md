@@ -169,3 +169,49 @@ backend/
 
 **Sourav Singh Negi**
 >>>>>>> 216d548 (connect frontend)
+
+
+ Receive file
+Read file content
+Convert into structured data
+Return response 
+
+
+loanAmount = 5,00,000
+
+requiredFlow = loanAmount * 2
+             = 10,00,000
+
+if totalCredits >= requiredFlow
+    → SUCCESS
+else
+    → FAILED
+*/
+
+/*
+FLOW
+
+1. Upload file (CSV/PDF)
+
+2. Parse file
+   → transactions[]
+
+3. Normalize data
+   → { date, amount, type: "credit" | "debit" }
+
+4. Filter by period
+   → date >= (today - X months)   // 3 / 6 / 12
+
+5. Calculate
+   → totalCredits (only type === "credit")
+
+6. Logic
+   requiredFlow = loanAmount * 2
+
+   if totalCredits >= requiredFlow
+       status = "success"
+   else
+       status = "failed"
+
+7. Response
+   → { status, totalCredits }
