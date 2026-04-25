@@ -1,3 +1,4 @@
+import LoanForm from "./components/LoanForm";
 import UploadFile from "./components/UploadFile";
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
     <>
       <h3>file upload sys</h3>
       <UploadFile></UploadFile>
+      <LoanForm></LoanForm>
     </>
   );
 }
