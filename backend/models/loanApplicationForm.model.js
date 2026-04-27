@@ -56,14 +56,19 @@ const loanApplicationSchema = new mongoose.Schema({
     require: true,
     unique: true,
   },
-  loanAmount: {
-    type: Number,
-    require: true,
-  },
-  status: {
-    type: String,
-    default: "pending",
-  },
+    loanAmount: {
+      type: Number,
+      require: true,
+    },
+    status: {
+      type: String,
+      default: "pending",
+    },
+    statementUploaded: {
+      type: Boolean,
+      default: false,
+    },
+    statementResult: { type: String, default: "failed" },
 });
 
 /*mongoose.model() takes your schema and creates a Model — which is the actual tool you use to interact with the database.

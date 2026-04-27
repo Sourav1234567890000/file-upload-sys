@@ -26,6 +26,7 @@ const UploadFile = () => {
 
     // append file
     formData.append("file", file);
+    formData.append("email", "souravnegi144@gmail.com");
 
     // call API
     const res = await fetch("http://localhost:5000/api/upload", {
