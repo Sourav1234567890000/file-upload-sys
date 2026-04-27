@@ -4,6 +4,10 @@ const upload = multer({
   storage: multer.memoryStorage(),
 });
 
-const uploadMiddleware = upload.single("file");
+const bankStatementUploadMulter = upload.single("file");
+const loanUploadMiddleware = upload.fields([
+  { name: "panCard" },
+  { name: "aadhaarCard" },
+]);
 
-module.exports = uploadMiddleware;
+module.exports = { bankStatementUploadMulter, loanUploadMiddleware };
