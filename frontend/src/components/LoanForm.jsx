@@ -22,6 +22,9 @@ const LoanForm = () => {
       method: "POST",
       body: formData,
     });
+    const result = await response.json();
+    const email = result.data.email;
+    console.log(email);
   };
 
   renderCount++;

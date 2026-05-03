@@ -5,7 +5,6 @@ const {
   bankStatementUploadMulter,
 } = require("../middleware/upload.middleware");
 const registerApplicant = require("../controllers/loanApplication.controller");
-
 const router = express.Router();
 
 router.post("/upload", bankStatementUploadMulter, uploadFile);

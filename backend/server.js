@@ -3,6 +3,7 @@ const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
 const uploadRoutes = require("./routes/upload.routes");
+const authRoutes = require("./routes/auth.routes");
 const mongoose = require("mongoose");
 
 mongoose
@@ -24,7 +25,11 @@ app.get("/", (req, res) => {
   res.send("Server running");
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/api", uploadRoutes);
+app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on http://localhost:${PORT}`);
