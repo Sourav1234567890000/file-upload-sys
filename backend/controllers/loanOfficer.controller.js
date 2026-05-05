@@ -19,7 +19,7 @@ const registerLoanOfficer = async (req, res) => {
   const officer = new loanOfficer({ ...req.body, password: hashedPassword });
 
   await officer.save();
-  return res.status(200).json({
+  return res.status(200).json.stringify({
     status: "OK",
     message: "loan officer registered successfully",
     data: { email: req.body.email },

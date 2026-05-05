@@ -1,13 +1,8 @@
-import LoanForm from "./components/LoanForm";
-import UploadFile from "./components/UploadFile";
+import Login from "./features/auth/pages/Login";
 
 function App() {
-  return (
-    <>
-      <h3>file upload sys</h3>
-      <UploadFile></UploadFile>
-      <LoanForm></LoanForm>
-    </>
-  );
+  return <>
+  <Login></Login>
+  </>;
 }
 export default App;
