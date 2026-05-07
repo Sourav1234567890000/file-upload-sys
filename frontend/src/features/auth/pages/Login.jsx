@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DashboardHome from "../../dashboard/pages/DashboardHome";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState(null);
+  const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -16,6 +19,13 @@ const Login = () => {
       });
 
       const data = await res.json();
+
+      // store user
+      localStorage.setItem("user", JSON.stringify(data));
+
+      // go to dashboard
+      navigate("/DashboardHome");
+
       setResponse(data);
     } catch (err) {
       console.error(err);
