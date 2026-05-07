@@ -1,24 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import { useNavigate } from "react-router-dom";
 
 const DashboardHome = () => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (!storedUser) {
-      navigate("/login");
-    } else {
-      setUser(storedUser);
-    }
-  }, []);
   
   return (
     <div>
@@ -43,7 +27,7 @@ const DashboardHome = () => {
         location="delhi"
         loanAmount="60000"
       ></Card>
-      <button onClick={logout}></button>
+      {/* <button onClick={logout}></button> */}
     </div>
   );
 };
