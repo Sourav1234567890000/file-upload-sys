@@ -24,7 +24,9 @@ const Login = () => {
       // go to dashboard
 
       if (res.ok) {
-        navigate("/dashboard");
+
+        navigate("/dashboard", {state : {user : data}});
+
       } else {
         console.log(data.message || "Login failed");
       }
