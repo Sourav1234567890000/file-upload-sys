@@ -38,37 +38,37 @@ const loanApplicationSchema = new mongoose.Schema({
   },
   aadhaarCard: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   aadhaarNumber: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   panCard: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
   panNumber: {
     type: String,
-    require: true,
+    required: true,
     unique: true,
   },
-    loanAmount: {
-      type: Number,
-      require: true,
-    },
-    status: {
-      type: String,
-      default: "pending",
-    },
-    statementUploaded: {
-      type: Boolean,
-      default: false,
-    },
-    statementResult: { type: String, default: "failed" },
+  loanAmount: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "pending",
+  },
+  statementUploaded: {
+    type: Boolean,
+    default: false,
+  },
+  statementResult: { type: String, default: "failed" },
 });
 
 /*mongoose.model() takes your schema and creates a Model — which is the actual tool you use to interact with the database.
@@ -79,4 +79,4 @@ Model = the actual class you use to create, read, update, delete records
 
 Without this line you have a blueprint but no way to use it. This line connects the two. */
 
-module.exports = mongoose.model("LoanApplication", loanApplicationSchema);
+module.exports = mongoose.model("applicant", loanApplicationSchema);

@@ -14,7 +14,11 @@ const LoanForm = () => {
     // JSON cannot carry files, so FormData handles both text fields and files together
 
     for (let key in data) {
-      formData.append(key, data[key]);
+      if (key === "panCard" || key === "aadhaarCard") {
+        formData.append(key, data[key][0]);
+      } else {
+        formData.append(key, data[key]);
+      }
     }
 
     console.log(data);
@@ -31,7 +35,6 @@ const LoanForm = () => {
 
   return (
     <div>
-      <h1>{renderCount / 2}</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="firstName"> first name</label>
         <input type="text" id="firstName" {...register("firstName")} />
