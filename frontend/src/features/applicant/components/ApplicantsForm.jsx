@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import "./loanForm.css";
+import { useNavigate } from "react-router-dom";
 
-let renderCount = 0;
-
-const LoanForm = () => {
+const ApplicantsForm = () => {
   const form = useForm();
   const { register, control, handleSubmit } = form;
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     const formData = new FormData();
@@ -22,16 +22,20 @@ const LoanForm = () => {
     }
 
     console.log(data);
-    const response = await fetch("http://localhost:5000/api/loan/apply", {
-      method: "POST",
-      body: formData,
-    });
-    const result = await response.json();
-    const email = result.data.email;
-    console.log(email);
-  };
+    const response = await fetch(
+      "http://localhost:5000/api/loan/aply/applicant",
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
 
-  renderCount++;
+    const result = await response.json();
+    if (result.status === "success") {
+      const applicantId = result.applicantId;
+      navigate(`/dashboard/co-applicant-form/${applicantId}`);
+    }
+  };
 
   return (
     <div>
@@ -98,4 +102,4 @@ const LoanForm = () => {
   );
 };
 
-export default LoanForm;
+export default ApplicantsForm;

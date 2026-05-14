@@ -3,11 +3,10 @@ const applicantModel = require("../models/applicant.model");
 const registerApplicant = async (req, res) => {
   try {
     console.log("Request body:", req.body);
+    console.log("Request files:", req.files);
 
-    // Extract email
     const applicantEmail = req.body.email;
 
-    // Validate required fields
     if (!applicantEmail) {
       return res.status(400).json({
         status: "error",
@@ -15,7 +14,6 @@ const registerApplicant = async (req, res) => {
       });
     }
 
-    // Check if applicant already exists
     const existingApplicant = await applicantModel.findOne({
       email: applicantEmail,
     });
@@ -27,15 +25,27 @@ const registerApplicant = async (req, res) => {
       });
     }
 
-    // Save applicant
-    const applicant = new applicantModel(req.body);
-    await applicant.save(); 
+    // Extract uploaded files
+    const panCardFile = req.files?.panCard?.[0];
+    const aadhaarCardFile = req.files?.aadhaarCard?.[0];
 
-    // Optional: set stage/status field
-    // applicant.status = "applicant_saved";
-    // await applicant.save();
+    if (!panCardFile || !aadhaarCardFile) {
+      return res.status(400).json({
+        status: "error",
+        message: "Both PAN card and Aadhaar card are required",
+      });
+    }
 
-    // Return applicantId for frontend
+    const applicant = new applicantModel({
+      ...req.body,
+
+      // saving filenames for now
+      panCard: panCardFile.originalname,
+      aadhaarCard: aadhaarCardFile.originalname,
+    });
+
+    await applicant.save();
+
     return res.status(200).json({
       status: "success",
       message: "Applicant saved successfully",
@@ -43,6 +53,7 @@ const registerApplicant = async (req, res) => {
     });
   } catch (error) {
     console.error("Error saving applicant:", error);
+
     return res.status(500).json({
       status: "error",
       message: "Applicant not saved",
