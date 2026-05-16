@@ -1,9 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./features/auth/pages/Login";
 import DashboardHome from "./features/dashboard/pages/DashboardHome";
-import ApplicantsForm from "./features/applicant/components/ApplicantsForm";
 import FormState from "./components/practice/FormState";
-import CoApplicantForm from "./features/co-applicant/components/CoApplicantForm";
+import ApplicationStage from "./features/stages/1-application-stage/ApplicationStage";
 
 const router = createBrowserRouter([
   {
@@ -15,12 +14,8 @@ const router = createBrowserRouter([
     element: <DashboardHome />,
   },
   {
-    path: "/dashboard/applicant-form",
-    element: <ApplicantsForm />,
-  },
-  {
-    path : '/dashboard/co-applicant-form/:applicantId',
-    element : <CoApplicantForm/>
+    path: "/dashboard/new-application",
+    element: <ApplicationStage />,
   }
   
 ]);

@@ -24,13 +24,11 @@ const Login = () => {
       // go to dashboard
 
       if (res.ok) {
-
-        navigate("/dashboard", {state : {user : data}});
-
+        localStorage.setItem("user", JSON.stringify(data));
+        navigate("/dashboard");
       } else {
         console.log(data.message || "Login failed");
       }
-      
     } catch (err) {
       console.error(err);
     }

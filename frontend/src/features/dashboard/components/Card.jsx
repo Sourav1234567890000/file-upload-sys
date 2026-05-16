@@ -1,11 +1,10 @@
 import React from "react";
 
-const Card = ({ stageName, applicantName, location, loanAmount }) => {
+const Card = ({ title, loanAmount }) => {
   return (
     <div>
-      <div>{stageName}</div>
-      <div>{applicantName}</div>
-      <div>{location}</div> - <span>{loanAmount}</span>
+      <div>{title}</div>
+      <div>{loanAmount}</div>
     </div>
   );
 };

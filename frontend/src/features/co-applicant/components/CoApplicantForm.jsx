@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 
-const CoApplicantForm = () => {
-  const { applicantId } = useParams();
+const CoApplicantForm = ({ applicantId, setCoAppFormStatus }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     middleName: "",
@@ -45,6 +43,7 @@ const CoApplicantForm = () => {
 
     const result = await response.json();
     console.log(result);
+    setCoAppFormStatus(true);
   };
   return (
     <div>

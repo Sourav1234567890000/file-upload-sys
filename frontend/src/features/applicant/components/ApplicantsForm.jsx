@@ -3,7 +3,7 @@ import { DevTool } from "@hookform/devtools";
 import "./loanForm.css";
 import { useNavigate } from "react-router-dom";
 
-const ApplicantsForm = () => {
+const ApplicantsForm = ({ setFormStatus, setApplicantId }) => {
   const form = useForm();
   const { register, control, handleSubmit } = form;
   const navigate = useNavigate();
@@ -33,7 +33,11 @@ const ApplicantsForm = () => {
     const result = await response.json();
     if (result.status === "success") {
       const applicantId = result.applicantId;
-      navigate(`/dashboard/co-applicant-form/${applicantId}`);
+      localStorage.setItem("applicantId", applicantId);
+      localStorage.setItem("applicantName", data.firstName);
+      localStorage.setItem("loanAmount", data.loanAmount);
+      setApplicantId(applicantId);
+      setFormStatus(true);
     }
   };
 
