@@ -6,6 +6,7 @@
   } = require("../middleware/upload.middleware");
   const registerApplicant = require("../controllers/applicant.controller");
   const registerCoApplicant = require("../controllers/coApplicantion.controller");
+const { getApplicantsCount, getApplicantDetails } = require("../controllers/dashBoard.controller");
 
   const router = express.Router();
 
@@ -14,5 +15,9 @@
   router.post("/loan/aply/applicant", loanUploadMiddleware, registerApplicant);
 
   router.post("/loan/aply/co-applicant", loanUploadMiddleware, registerCoApplicant);
+
+  router.get("/loan/dashboard/totalApplicants-count" , getApplicantsCount);
+
+  router.get("/loan/dashboard/applicantDetails" , getApplicantDetails)
 
   module.exports = router;

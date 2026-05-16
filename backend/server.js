@@ -2,11 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
-const uploadRoutes = require("./routes/upload.routes");
+const loanRoutes = require("./routes/loan.routes");
 const authRoutes = require("./routes/auth.routes");
 const mongoose = require("mongoose");
 
-console.log(process.env.MONGODB_URI);
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -29,7 +28,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", uploadRoutes);
+app.use("/api", loanRoutes);
 app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
