@@ -62,4 +62,18 @@ const registerApplicant = async (req, res) => {
   }
 };
 
-module.exports = registerApplicant;
+const getApplicant = async (req, res) => {
+  try {
+    const applicant = await applicantModel.findById(req.params.applicantId);
+    return res.status(200).json({
+      status: "success",
+      applicant,
+    });
+  } catch (error) {
+    return res.status(500).json({ status: "error", message: error.message });
+  }
+};
+module.exports = {
+  registerApplicant,
+  getApplicant,
+};
