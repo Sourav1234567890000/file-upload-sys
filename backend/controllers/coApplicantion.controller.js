@@ -41,4 +41,26 @@ const registerCoApplicant = async (req, res) => {
   }
 };
 
-module.exports = registerCoApplicant;
+const getCoApplicant = async (req, res) => {
+  try {
+    const coApplicant = await coApplicantModel.find({
+      applicantId: req.params.applicantId,
+    });
+    const coApplicantCount = await coApplicantModel.countDocuments({
+      applicantId: req.params.applicantId,
+    });
+
+    return res.status(200).json({
+      status: "success",
+      coApplicant,
+      coApplicantCount,
+    });
+  } catch (error) {
+    return res.status(500).json({ status: "error", message: error.message });
+  }
+};
+
+module.exports = {
+  registerCoApplicant,
+  getCoApplicant,
+};

@@ -1,14 +1,21 @@
 const express = require("express");
 const uploadFile = require("../controllers/upload.controller");
+
 const {
   loanUploadMiddleware,
   bankStatementUploadMulter,
 } = require("../middleware/upload.middleware");
+
 const {
   registerApplicant,
   getApplicant,
 } = require("../controllers/applicant.controller");
-const registerCoApplicant = require("../controllers/coApplicantion.controller");
+
+const {
+  registerCoApplicant,
+  getCoApplicant,
+} = require("../controllers/coApplicantion.controller");
+
 const {
   getApplicantsCount,
   getApplicantDetails,
@@ -31,5 +38,7 @@ router.get("/loan/dashboard/totalApplicants-count", getApplicantsCount);
 router.get("/loan/dashboard/applicantDetails", getApplicantDetails);
 
 router.get("/loan/applicant/:applicantId", getApplicant);
+
+router.get("/loan/co-applicant/:applicantId", getCoApplicant);
 
 module.exports = router;

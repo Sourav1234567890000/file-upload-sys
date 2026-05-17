@@ -51,7 +51,10 @@ const ApplicationStage = () => {
     <div>
       <h1>Applications Stage</h1>
       {urlApplicantId ? (
-        <ApplicantDetails fetchApplicantDetails={fetchApplicantDetails} />
+        <ApplicantDetails
+          fetchApplicantDetails={fetchApplicantDetails}
+          urlApplicantId={urlApplicantId}
+        />
       ) : (
         <ApplicantsForm
           setFormStatus={setFormStatus}
@@ -73,7 +76,6 @@ const ApplicationStage = () => {
       )}
 
       <button onClick={submitAppDetails}>Submit Application Details</button>
-      <span>{coApplicants.length}</span>
     </div>
   );
 };
