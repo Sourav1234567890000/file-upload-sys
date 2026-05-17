@@ -1,7 +1,27 @@
 import React, { useEffect, useState } from "react";
 import CoApplicantDetails from "./CoApplicantDetails";
 
-const ApplicantDetails = ({ fetchApplicantDetails, urlApplicantId }) => {
+const ApplicantDetails = ({ urlApplicantId }) => {
+  const [fetchApplicantDetails, setFetchApplicantDetails] = useState({});
+
+  useEffect(() => {
+    if (urlApplicantId) {
+      const fetchDetails = async () => {
+        const response = await fetch(
+          `http://localhost:5000/api/loan/applicant/${urlApplicantId}`,
+          {
+            method: "GET",
+          },
+        );
+        const data = await response.json();
+        const applicant = data.applicant;
+        setFetchApplicantDetails(applicant);
+        console.log(applicant);
+      };
+      fetchDetails();
+    }
+  }, []);
+
   const fields = [
     { label: "First Name", value: fetchApplicantDetails.firstName },
     { label: "Middle Name", value: fetchApplicantDetails.middleName },
@@ -34,6 +54,7 @@ const ApplicantDetails = ({ fetchApplicantDetails, urlApplicantId }) => {
   return (
     <>
       <div style={styles.container}>
+        <h2>Applicant details : {fetchApplicantDetails.firstName}</h2>
         {fields.map((field, index) => (
           <div key={index} style={styles.row}>
             <span style={styles.label}>{field.label}</span>
@@ -41,11 +62,6 @@ const ApplicantDetails = ({ fetchApplicantDetails, urlApplicantId }) => {
           </div>
         ))}
       </div>
-      <span> Co-Applicant = {fetchCoApplicantCount}</span>
-      {fetchCoApplicantCount && (
-        <CoApplicantDetails fetchCoApplicantDetails={fetchCoApplicantDetails} />
-      )}
-      <br></br>
     </>
   );
 };
