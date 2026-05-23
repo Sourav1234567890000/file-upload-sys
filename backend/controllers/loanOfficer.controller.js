@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const loanOfficer = require("../models/loanOfficer.model");
+const loanOfficer = require("../models/user.model");
 
 const registerLoanOfficer = async (req, res) => {
   console.log(req.body);
