@@ -18,8 +18,10 @@ mongoose
 
     try {
       console.log("MongoDB connected");
-      // Step 1 — Check if admin already exists in DB
-      const superAdmin = await userModel.findOne({ role: "superAdmin" });
+      // correct — checks by email, prevents duplicate for same email
+      const superAdmin = await userModel.findOne({
+        email: process.env.SUPERADMIN_EMAIL,
+      });
       // Step 2 — If exists, log and exit
       if (superAdmin) {
         console.log("super admin is exist and logged in");

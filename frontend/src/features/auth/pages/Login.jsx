@@ -10,8 +10,9 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
+    
     try {
+      console.log("submit handler called");
       const res = await fetch("http://localhost:5000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

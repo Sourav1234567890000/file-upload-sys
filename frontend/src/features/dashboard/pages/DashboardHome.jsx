@@ -5,11 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 const DashboardHome = () => {
   const location = useLocation();
   const submitDetails = location.state;
-
+  
   const user = JSON.parse(localStorage.getItem("user"));
-  const userData = user?.data;
-  const email = userData?.email;
-  const userName = userData?.userName;
+  console.log(user);
+  const userData = user;
+  const email = userData?.userInfo?.email;
+  const userName = userData?.userInfo?.user;
 
   const [cards, setCards] = useState([]);
   const [cardsCount, setCardsCount] = useState(null);
@@ -107,10 +108,12 @@ const DashboardHome = () => {
         {" "}
         total applicants :{cardsCount}
       </span>
-      <div style={{
-        display : "flex",
-        columnGap : "23px"
-      }}>
+      <div
+        style={{
+          display: "flex",
+          columnGap: "23px",
+        }}
+      >
         {cards.map((item, index) => (
           <Card
             key={index}

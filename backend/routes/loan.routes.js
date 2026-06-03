@@ -27,11 +27,7 @@ router.post("/upload", bankStatementUploadMulter, uploadFile);
 
 router.post("/loan/aply/applicant", loanUploadMiddleware, registerApplicant);
 
-router.post(
-  "/loan/aply/co-applicant",
-  loanUploadMiddleware,
-  registerCoApplicant,
-);
+router.post("/loan/aply/co-applicant",loanUploadMiddleware,registerCoApplicant);
 
 router.get("/loan/dashboard/totalApplicants-count", getApplicantsCount);
 
