@@ -3,6 +3,7 @@ import Login from "./features/auth/pages/Login";
 import DashboardHome from "./features/dashboard/pages/DashboardHome";
 import FormState from "./components/practice/FormState";
 import ApplicationStage from "./features/stages/1-application-stage/pages/ApplicationStage";
+import CreateUser from "./features/user-management/pages/CreateUser";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/application/:applicantId",
     element: <ApplicationStage />,
+  },
+  {
+    path: "/dashboard/create-user",
+    element: <CreateUser />,
   },
 ]);
 

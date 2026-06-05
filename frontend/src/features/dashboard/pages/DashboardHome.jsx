@@ -2,18 +2,28 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { useLocation, useNavigate } from "react-router-dom";
 
+// decode token
+import { jwtDecode } from "jwt-decode";
+
 const DashboardHome = () => {
   const location = useLocation();
   const submitDetails = location.state;
-  
+
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
+  const token = user?.token;
+
+  // decode token
+  const decoded = jwtDecode(token);
+  console.log(decoded);
+
   const userData = user;
   const email = userData?.userInfo?.email;
   const userName = userData?.userInfo?.user;
 
   const [cards, setCards] = useState([]);
   const [cardsCount, setCardsCount] = useState(null);
+  const [permission, setPermission] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,6 +41,14 @@ const DashboardHome = () => {
         const totalCounts = data.totalApplicantCount;
 
         setCardsCount(totalCounts);
+
+        // permissions access
+        if (decoded?.role === "superAdmin") {
+          setPermission(true);
+        }
+
+
+
       } catch (error) {
         console.error(error);
       }
@@ -68,6 +86,10 @@ const DashboardHome = () => {
     navigate("/dashboard/new-application");
   };
 
+  const createUser = () => {
+    navigate("/dashboard/create-user")
+  }
+
   return (
     <div>
       <h1>DASHBOARD </h1>
@@ -92,6 +114,7 @@ const DashboardHome = () => {
         Email : {email}
       </p>
       <button onClick={startNewApplication}>New Application</button>
+      {permission && <button onClick={createUser}>create user </button>}
       <br></br>
       <br></br>
       <span

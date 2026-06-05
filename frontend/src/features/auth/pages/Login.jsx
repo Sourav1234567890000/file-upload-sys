@@ -22,6 +22,7 @@ const Login = () => {
       const data = await res.json();
 
       setResponse(data);
+      
       // go to dashboard
 
       if (res.ok) {
