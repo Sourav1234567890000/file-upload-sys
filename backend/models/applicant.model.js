@@ -69,6 +69,11 @@ const loanApplicationSchema = new mongoose.Schema({
     default: false,
   },
   statementResult: { type: String, default: "failed" },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
 });
 
 /*mongoose.model() takes your schema and creates a Model — which is the actual tool you use to interact with the database.

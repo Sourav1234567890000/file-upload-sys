@@ -12,6 +12,9 @@ Security guard
 
 const verifyToken = (req, res, next) => {
   try {
+    console.log("verifyToken called");
+    console.log(req.headers);
+
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -24,6 +27,7 @@ const verifyToken = (req, res, next) => {
       token,
       process.env.JWT_ACCESSTOKEN_SECRET,
       (error, decoded) => {
+        console.log(decoded);
         if (error) {
           return res.status(401).json({ message: "Token invalid or expired" });
         }

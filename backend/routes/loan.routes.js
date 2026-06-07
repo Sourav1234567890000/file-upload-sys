@@ -20,14 +20,15 @@ const {
   getApplicantsCount,
   getApplicantDetails,
 } = require("../controllers/dashBoard.controller");
+const { verifyToken } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
 router.post("/upload", bankStatementUploadMulter, uploadFile);
 
-router.post("/loan/aply/applicant", loanUploadMiddleware, registerApplicant);
+router.post("/loan/aply/applicant", loanUploadMiddleware, verifyToken, registerApplicant);
 
-router.post("/loan/aply/co-applicant",loanUploadMiddleware,registerCoApplicant);
+router.post("/loan/aply/co-applicant",loanUploadMiddleware, verifyToken, registerCoApplicant);
 
 router.get("/loan/dashboard/totalApplicants-count", getApplicantsCount);
 

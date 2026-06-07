@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CreateUser = () => {
+  const [submitStatus, setSubmitStatus] = useState(false);
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -12,9 +16,32 @@ const CreateUser = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem("user"))?.token;
+
+    const response = await fetch("http://localhost:5000/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const result = await response.json();
+
+    if (result) {
+      console.log(result);
+      setSubmitStatus(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 3000);
+    }
+  };
   return (
     <div>
-      <form action="">
+      <form onSubmit={onSubmit}>
         <label htmlFor="userName">user name</label>
         <input
           type="text"
@@ -51,6 +78,7 @@ const CreateUser = () => {
 
         <button type="submit">submit</button>
       </form>
+      {submitStatus && <span>form submitted successfully</span>}
     </div>
   );
 };

@@ -2,8 +2,7 @@ const applicantModel = require("../models/applicant.model");
 
 const registerApplicant = async (req, res) => {
   try {
-    console.log("Request body:", req.body);
-    console.log("Request files:", req.files);
+    console.log(req.user);
 
     const applicantEmail = req.body.email;
 
@@ -39,6 +38,7 @@ const registerApplicant = async (req, res) => {
     const applicant = new applicantModel({
       ...req.body,
 
+      createdBy: req.user.id,
       // saving filenames for now
       panCard: panCardFile.originalname,
       aadhaarCard: aadhaarCardFile.originalname,
