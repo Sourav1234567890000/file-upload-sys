@@ -30,11 +30,11 @@ router.post("/loan/aply/applicant", loanUploadMiddleware, verifyToken, registerA
 
 router.post("/loan/aply/co-applicant",loanUploadMiddleware, verifyToken, registerCoApplicant);
 
-router.get("/loan/dashboard/totalApplicants-count", getApplicantsCount);
+router.get("/loan/dashboard/totalApplicants-count", verifyToken, getApplicantsCount);
 
-router.get("/loan/dashboard/applicantDetails", getApplicantDetails);
+router.get("/loan/dashboard/applicantDetails", verifyToken,  getApplicantDetails);
 
-router.get("/loan/applicant/:applicantId", getApplicant);
+router.get("/loan/applicant/:applicantId", verifyToken,  getApplicant);
 
 router.get("/loan/co-applicant/:applicantId", getCoApplicant);
 

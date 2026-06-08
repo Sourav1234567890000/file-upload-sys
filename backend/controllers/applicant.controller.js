@@ -65,10 +65,13 @@ const registerApplicant = async (req, res) => {
 const getApplicant = async (req, res) => {
   try {
     const applicant = await applicantModel.findById(req.params.applicantId);
-    return res.status(200).json({
-      status: "success",
-      applicant,
-    });
+    if (applicant.createdBy == req.user.id) {
+      console.log(applicant);
+      return res.status(200).json({
+        status: "success",
+        applicant,
+      });
+    }
   } catch (error) {
     return res.status(500).json({ status: "error", message: error.message });
   }

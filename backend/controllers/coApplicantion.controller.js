@@ -1,10 +1,8 @@
+const applicantModel = require("../models/applicant.model");
 const coApplicantModel = require("../models/co-applicant.model");
 
 const registerCoApplicant = async (req, res) => {
   try {
-    console.log("requested data : ", req.body);
-    console.log("requested file : ", req.files);
-
     const aadhaarCardFile = req.files?.aadhaarCard?.[0];
 
     if (!aadhaarCardFile) {
@@ -43,11 +41,28 @@ const registerCoApplicant = async (req, res) => {
 
 const getCoApplicant = async (req, res) => {
   try {
-    const coApplicant = await coApplicantModel.find({
-      applicantId: req.params.applicantId,
-    });
+    const { applicantId } = req.params;
+
+    const applicant = await applicantModel.findById(applicantId);
+
+    if (!applicant) {
+      return res.status(404).json({
+        status: "error",
+        message: "Applicant not found",
+      });
+    }
+
+    if (applicant.createdBy != req.user.id) {
+      return res.status(403).json({
+        status: "error",
+        message: "Access denied",
+      });
+    }
+
+    const coApplicant = await coApplicantModel.find({ applicantId });
+
     const coApplicantCount = await coApplicantModel.countDocuments({
-      applicantId: req.params.applicantId,
+      applicantId,
     });
 
     return res.status(200).json({
@@ -56,7 +71,10 @@ const getCoApplicant = async (req, res) => {
       coApplicantCount,
     });
   } catch (error) {
-    return res.status(500).json({ status: "error", message: error.message });
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
   }
 };
 
