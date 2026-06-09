@@ -8,6 +8,9 @@ const ApplicantsForm = ({ setFormStatus, setApplicantId }) => {
   const { register, control, handleSubmit } = form;
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     // FormData is used because the form contains file inputs (panCard, aadhaarCard)
@@ -27,6 +30,9 @@ const ApplicantsForm = ({ setFormStatus, setApplicantId }) => {
       {
         method: "POST",
         body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
 

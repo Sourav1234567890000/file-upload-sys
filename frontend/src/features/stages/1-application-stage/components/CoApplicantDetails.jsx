@@ -6,7 +6,7 @@ const CoApplicantDetails = ({ urlApplicantId }) => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user?.token;
-  
+
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -24,8 +24,8 @@ const CoApplicantDetails = ({ urlApplicantId }) => {
             },
           },
         );
-
-        const data = await response.json();
+        
+        const data = await response.json(); 
 
         console.log("API Response:", data);
 

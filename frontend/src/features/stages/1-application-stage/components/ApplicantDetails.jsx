@@ -37,43 +37,6 @@ const ApplicantDetails = ({ urlApplicantId }) => {
     { label: "Email", value: fetchApplicantDetails.email },
   ];
 
-  const [fetchCoApplicantDetails, setFetchCoApplicantDetails] = useState([]);
-  const [fetchCoApplicantCount, setFetchCoApplicantCount] = useState(null);
-  useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        console.log("before CoApplicant token:", token);
-        console.log("CoApplicant ID:", urlApplicantId);
-
-        if (!urlApplicantId) return;
-
-        const response = await fetch(
-          `http://localhost:5000/api/loan/co-applicant/${urlApplicantId}`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        const data = await response.json();
-
-        console.log("API Response:", data);
-
-        const coApplicant = data.coApplicant;
-        const coApplicantCount = data.coApplicantCount;
-
-        setFetchCoApplicantCount(coApplicantCount);
-        setFetchCoApplicantDetails(coApplicant);
-      } catch (error) {
-        console.error("Error fetching co-applicant:", error);
-      }
-    };
-
-    fetchDetails();
-  }, [urlApplicantId, token]);
-
   return (
     <>
       <div style={styles.container}>

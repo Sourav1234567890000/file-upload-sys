@@ -3,9 +3,9 @@ const applicantModel = require("../models/applicant.model");
 const getApplicantsCount = async (req, res) => {
   try {
     console.log("get applicants count", req.user);
-    const totalApplicantCount = await applicantModel.countDocuments({
-      createdBy: req.user.id,
-    });
+    const totalApplicantCount = await applicantModel.countDocuments(
+      req.accessFilter,
+    );
     return res.status(200).json({
       status: "success",
       totalApplicantCount,
@@ -21,7 +21,7 @@ const getApplicantsCount = async (req, res) => {
 const getApplicantDetails = async (req, res) => {
   try {
     const applicantDetails = await applicantModel.find(
-      { createdBy : req.user.id},
+      req.accessFilter,
       { firstName: 1, loanAmount: 1 },
     );
     return res.status(200).json({

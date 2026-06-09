@@ -20,7 +20,7 @@ const {
   getApplicantsCount,
   getApplicantDetails,
 } = require("../controllers/dashBoard.controller");
-const { verifyToken } = require("../middleware/auth.middleware");
+const { verifyToken, accessScope } = require("../middleware/auth.middleware");
 
 const router = express.Router();
 
@@ -30,9 +30,9 @@ router.post("/loan/aply/applicant", loanUploadMiddleware, verifyToken, registerA
 
 router.post("/loan/aply/co-applicant",loanUploadMiddleware, verifyToken, registerCoApplicant);
 
-router.get("/loan/dashboard/totalApplicants-count", verifyToken, getApplicantsCount);
+router.get("/loan/dashboard/totalApplicants-count", verifyToken, accessScope, getApplicantsCount);
 
-router.get("/loan/dashboard/applicantDetails", verifyToken,  getApplicantDetails);
+router.get("/loan/dashboard/applicantDetails", verifyToken, accessScope,  getApplicantDetails);
 
 router.get("/loan/applicant/:applicantId", verifyToken,  getApplicant);
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const CoApplicantForm = ({ applicantId, setCoAppFormStatus }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
   const [formData, setFormData] = useState({
     firstName: "",
     middleName: "",
@@ -38,6 +40,9 @@ const CoApplicantForm = ({ applicantId, setCoAppFormStatus }) => {
       {
         method: "POST",
         body: payload,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
 

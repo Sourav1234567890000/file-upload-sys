@@ -23,18 +23,14 @@ const verifyToken = (req, res, next) => {
 
     const token = authHeader.split(" ")[1];
 
-    const verifyJWT = jwt.verify(
-      token,
-      process.env.JWT_ACCESSTOKEN_SECRET,
-      (error, decoded) => {
-        console.log(decoded);
-        if (error) {
-          return res.status(401).json({ message: "Token invalid or expired" });
-        }
-        req.user = decoded;
-        next();
-      },
-    );
+    jwt.verify(token, process.env.JWT_ACCESSTOKEN_SECRET, (error, decoded) => {
+      console.log(decoded);
+      if (error) {
+        return res.status(401).json({ message: "Token invalid or expired" });
+      }
+      req.user = decoded;
+      next();
+    });
   } catch (error) {
     return res.status(401).json({ error: error });
   }
@@ -50,4 +46,15 @@ const authorizeRole = (...roles) => {
   };
 };
 
-module.exports = { verifyToken, authorizeRole };
+const accessScope = (req, res, next) => {
+  if (req.user.role === "superAdmin") {
+    req.accessFilter = {};
+  } else {
+    req.accessFilter = {
+      createdBy: req.user?.id,
+    };
+  }
+  next();
+};
+
+module.exports = { verifyToken, authorizeRole, accessScope };
