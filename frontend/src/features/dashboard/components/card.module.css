@@ -1,0 +1,128 @@
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 150px;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #009ba4; /* Highlights card frame with your global brand teal-green */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: capitalize;
+}
+
+.viewDetails {
+  font-size: 12px;
+  font-weight: 600;
+  color: #009ba4; /* Global theme color transition */
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: all 0.2s ease;
+}
+
+.card:hover .viewDetails {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.loanSection {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.loanLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.loanAmount {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Crisp internal separator line */
+.divider {
+  height: 1px;
+  background: #f1f5f9;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+
+/* User information strip at base */
+.userInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.metaLabel {
+  font-size: 10px;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  text-transform: capitalize;
+}
+
+/* Role badge pills */
+.roleBadge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: #f1f5f9;
+  color: #475569;
+  text-transform: capitalize;
+}
+
+/* Dynamic situational color modifiers matching user roles */
+.roleBadge.superAdmin {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.roleBadge.admin {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.roleBadge.rm {
+  background: #e0f2fe;
+  color: #0284c7;
+}

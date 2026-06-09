@@ -1,0 +1,196 @@
+/* Core container occupying the entire screen */
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+/* Left Side: Editorial/Branded Panel */
+.brandPanel {
+  flex: 1;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); /* Deep slate institutional background */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 60px;
+  color: #ffffff;
+}
+
+/* Fallback for smaller tablet/mobile devices */
+@media (max-width: 900px) {
+  .brandPanel {
+    display: none; 
+  }
+}
+
+.logoArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 32px;
+  height: 32px;
+  background-color: #009ba4; /* Your brand Teal-Green */
+  border-radius: 6px;
+}
+
+.portalBrandName {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+}
+
+.brandHeroText h2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.brandHeroText p {
+  font-size: 16px;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.panelFooter {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Right Side: Spacious Form Column */
+.formColumn {
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 80px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+@media (max-width: 900px) {
+  .formColumn {
+    max-width: 100%;
+    padding: 40px 24px;
+  }
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* Typography elements */
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #475569;
+  margin: 0 0 32px 0;
+}
+
+/* Form groups and crisp institutional layout inputs */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #0f172a;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #009ba4; /* Focus match to brand color */
+  box-shadow: 0 0 0 3px rgba(0, 155, 164, 0.12);
+}
+
+/* Alert box for failed auth attempts */
+.errorBanner {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #b91c1c;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Flat solid core action button */
+.submitButton {
+  width: 100%;
+  height: 46px;
+  background-color: #009ba4;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  margin-top: 10px;
+}
+
+.submitButton:hover {
+  background-color: #00848c;
+}
+
+/* JSON response pre tag format */
+.debugResponse {
+  margin-top: 32px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: monospace;
+  max-height: 150px;
+  overflow-y: auto;
+  color: #475569;
+}

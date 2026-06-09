@@ -20,10 +20,9 @@ const getApplicantsCount = async (req, res) => {
 
 const getApplicantDetails = async (req, res) => {
   try {
-    const applicantDetails = await applicantModel.find(
-      req.accessFilter,
-      { firstName: 1, loanAmount: 1 },
-    );
+    const applicantDetails = await applicantModel
+      .find(req.accessFilter, { firstName: 1, loanAmount: 1, createdBy: 1 })
+      .populate("createdBy", "userName , role");
     return res.status(200).json({
       status: "success",
       applicantDetails,

@@ -1,3 +1,22 @@
+body {
+  margin: 0;
+  background: #f8fafc;
+  font-family: Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
 :root {
-  background: #DBE9EE;
+  /* The precise teal-green from the screenshot button */
+  --primary-brand: #009ba4; 
+  --primary-brand-hover: #00848c;
+  
+  /* The dark blue-slate used for section headers */
+  --section-bg: #2b7ea1; 
+  
+  /* Background frames */
+  --frame-bg: #555555;
+  --card-bg: #ffffff;
 }

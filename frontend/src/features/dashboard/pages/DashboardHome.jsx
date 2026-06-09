@@ -1,153 +1,139 @@
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
-import { useLocation, useNavigate } from "react-router-dom";
-
-// decode token
+import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import Card from "../components/Card";
+import styles from "./dashboard.module.css";
 
 const DashboardHome = () => {
-  const location = useLocation();
-  const submitDetails = location.state;
-
-  const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
-  const token = user?.token;
-
-  // decode token
-  const decoded = jwtDecode(token);
-  console.log(decoded);
-
-  const userData = user;
-  const email = userData?.userInfo?.email;
-  const userName = userData?.userInfo?.user;
-
-  const [cards, setCards] = useState([]);
-  const [cardsCount, setCardsCount] = useState(null);
-  const [permission, setPermission] = useState(false);
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+  const decoded = token ? jwtDecode(token) : null;
+
+  const email = user?.userInfo?.email;
+  const userName = user?.userInfo?.user;
+
+  const [cards, setCards] = useState([]);
+  const [cardsCount, setCardsCount] = useState(0);
+  const [permission, setPermission] = useState(false);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDashboardData = async () => {
       try {
-        const response = await fetch(
+        const countResponse = await fetch(
           "http://localhost:5000/api/loan/dashboard/totalApplicants-count",
           {
             method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           },
         );
+        const countData = await countResponse.json();
+        setCardsCount(countData.totalApplicantCount || 0);
 
-        const data = await response.json();
-
-        const totalCounts = data.totalApplicantCount;
-
-        setCardsCount(totalCounts);
-
-        // permissions access
         if (decoded?.role === "superAdmin") {
           setPermission(true);
         }
-      } catch (error) {
-        console.error(error);
-      }
 
-      try {
-        const response = await fetch(
+        const applicantResponse = await fetch(
           "http://localhost:5000/api/loan/dashboard/applicantDetails",
           {
             method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           },
         );
 
-        const data = await response.json();
+        const applicantData = await applicantResponse.json();
+
         setCards(
-          data.applicantDetails.map((item) => ({
+          (applicantData.applicantDetails || []).map((item) => ({
             applicantName: item.firstName,
             applicantLoan: item.loanAmount,
             id: item._id,
+            userName: item.createdBy?.userName || item.createdBy?.firstName || "System",
+            role: item.createdBy?.role || "user"
           })),
         );
       } catch (error) {
-        console.error(error);
+        console.error("Dashboard Error:", error);
       }
     };
 
-    fetchData();
-  }, []);
-
-  const openLoanForm = () => {
-    console.log("card button clicked");
-    navigate("/dashboard/applicat-form");
-  };
-
-  const startNewApplication = () => {
-    navigate("/dashboard/new-application");
-  };
-
-  const createUser = () => {
-    navigate("/dashboard/create-user");
-  };
+    if (token) fetchDashboardData();
+  }, [token]);
 
   return (
-    <div>
-      <h1>DASHBOARD </h1>
-      <h1
-        style={{
-          fontSize: "24px",
-          fontWeight: "700",
-          color: "#222",
-          marginBottom: "5px",
-        }}
-      >
-        Welcome : {userName}
-      </h1>
+    <div className={styles.dashboard}>
+      {/* 1. TOP MAIN HEADER NAVBAR ROW */}
+      <div className={styles.header}>
+        <div className={styles.titleArea}>
+          <h1 className={styles.title}>Loan Against property</h1>
+        </div>
 
-      <p
-        style={{
-          fontSize: "16px",
-          color: "#555",
-          marginTop: "0",
-        }}
-      >
-        Email : {email}
-      </p>
-      <button onClick={startNewApplication}>New Application</button>
-      {permission && <button onClick={createUser}>create user </button>}
-      <br></br>
-      <br></br>
-      <span
-        style={{
-          fontSize: "28px",
-          fontWeight: "600",
-          color: "#1a73e8",
-          marginLeft: "10px",
-          padding: "4px 8px",
-          borderRadius: "6px",
-          backgroundColor: "#e8f0fe",
-        }}
-      >
-        {" "}
-        total applicants :{cardsCount}
-      </span>
-      <div
-        style={{
-          display: "flex",
-          columnGap: "23px",
-        }}
-      >
-        {cards.map((item, index) => (
-          <Card
-            key={index}
-            title={item.applicantName}
-            loanAmount={item.applicantLoan}
-            onClick={() => navigate(`/dashboard/application/${item.id}`)}
-          />
-        ))}
+        <div className={styles.rightControlGroup}>
+          <div className={styles.actions}>
+            {permission && (
+              <button className={styles.secondaryButton} onClick={() => navigate("/dashboard/create-user")}>
+                Provision User
+              </button>
+            )}
+            <button className={styles.primaryButton} onClick={() => navigate("/dashboard/new-application")}>
+              + Create New Application
+            </button>
+          </div>
+
+          <div className={styles.userInfo}>
+            <div className={styles.profileMetaText}>
+              <h2 className={styles.welcome}>{userName}</h2>
+              <p className={styles.email}>{email}</p>
+            </div>
+            <div className={styles.userBadgeAvatar}>
+              {userName ? userName.charAt(0).toUpperCase() : "U"}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. LOWER REGION: Now stacks vertically */}
+      <div className={styles.appBodyWindow}>
+        
+        {/* Horizontal Navigation Sub-Bar Ribbon */}
+        <div className={styles.sidebar}>
+          <div className={styles.sidebarBrand}>FINANCE PORTAL</div>
+          <div className={styles.navigationList}>
+            <div className={styles.navItemActive}>💼 Underwriting Cases</div>
+          </div>
+        </div>
+
+        {/* Workspace Display view */}
+        <div className={styles.mainWorkspace}>
+          <div className={styles.contentArea}>
+            
+            <div className={styles.statsCard}>
+              <span>Total Operational Applicants</span>
+              <h2>{cardsCount}</h2>
+            </div>
+
+            <div className={styles.sectionHeaderStrip}>
+              <span className={styles.sectionTitle}>Active Underwriting Files</span>
+            </div>
+
+            <div className={styles.cardGrid}>
+              {cards.map((item) => (
+                <Card
+                  key={item.id}
+                  title={item.applicantName}
+                  loanAmount={item.applicantLoan}
+                  userName={item.userName}
+                  role={item.role}
+                  onClick={() => navigate(`/dashboard/application/${item.id}`)}
+                />
+              ))}
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </div>
   );

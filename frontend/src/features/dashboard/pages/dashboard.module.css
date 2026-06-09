@@ -1,0 +1,279 @@
+/* Core Layout Grid */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Global Top Navigation Header spanning 100% viewport width */
+.header {
+  height: 75px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.titleArea {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+/* Right-aligned Header controls grouping swapping button and user credentials */
+.rightControlGroup {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primaryButton {
+  background: #009ba4;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.primaryButton:hover {
+  background: #00848c;
+}
+
+.secondaryButton {
+  background: #ffffff;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.secondaryButton:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userBadgeAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.profileMetaText {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.welcome {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.email {
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Master body content container stacked vertically below nav header */
+.appBodyWindow {
+  display: flex;
+  flex-direction: column; /* 👈 Changed from 'row' to 'column' to pile workspace under sub-nav */
+  flex: 1;
+  width: 100%;
+}
+
+/* NEW: The Horizontal Navigation Bar Layout resting under the Navbar */
+.sidebar {
+  width: 100%;
+  background: #0f172a; /* Keeping your deep midnight background theme styling */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 32px;
+  box-sizing: border-box;
+  gap: 24px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.sidebarBrand {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #94a3b8; /* Dimmed slightly to focus eye onto active case links */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0; /* Clear bottom margins since we are row aligned now */
+}
+
+.sidebarBrand::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background: #009ba4;
+  border-radius: 50%;
+}
+
+.navigationList {
+  display: flex;
+  flex-direction: row; /* 👈 Displays links horizontally side by side */
+  gap: 8px;
+}
+
+.navItemActive {
+  background: rgba(255, 255, 255, 0.08);
+  color: #009ba4;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Full Width Data Panel Workspace */
+.mainWorkspace {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Content Area layouts spanning beautifully across the page */
+.contentArea {
+  padding: 32px;
+  box-sizing: border-box;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.statsCard {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 12px 12px;
+  width: 205px;
+  margin-bottom: 24px;
+}
+
+.statsCard span {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.statsCard h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 4px 0 0 0;
+}
+
+.sectionHeaderStrip {
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* Horizontal Navigation Sub-Bar Ribbon */
+.sidebar {
+  width: 100%;
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 32px;
+  box-sizing: border-box;
+  gap: 24px;
+  border-bottom: 1px solid #1e293b;
+  
+  /* Enables horizontal scrolling if items overflow */
+  overflow-x: auto; 
+  white-space: nowrap;
+  
+  /* Smooth scrolling physics for trackpads and mobile devices */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; 
+}
+
+/* Hide the ugly native browser scrollbars to keep it professional */
+.sidebar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+.sidebar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.navigationList {
+  display: flex;
+  flex-direction: row; 
+  gap: 8px;
+  align-items: center;
+}
+
+/* Keeps your future location tab elements from shrinking/crunching */
+.navItemActive, .navItem {
+  flex-shrink: 0; 
+  white-space: nowrap;
+}

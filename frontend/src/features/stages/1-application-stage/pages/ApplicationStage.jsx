@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ApplicantsForm from "../../../applicant/components/ApplicantsForm";
 import CoApplicantForm from "../../../co-applicant/components/CoApplicantForm";
 import { useNavigate, useParams } from "react-router-dom";
 import ApplicantDetails from "../components/ApplicantDetails";
 import CoApplicantDetails from "../components/CoApplicantDetails";
+import styles from "./applicationStage.module.css";
 
 const ApplicationStage = () => {
   const navigate = useNavigate();
-
   const [formStatus, setFormStatus] = useState(false);
   const [coAppFormStatus, setCoAppFormStatus] = useState(false);
   const [applicantId, setApplicantId] = useState(null);
   const [applicantName, setApplicantName] = useState("");
   const [applicantLoan, setApplicantLoan] = useState(null);
-
-  // getting applicantId from useParams
   const { applicantId: urlApplicantId } = useParams();
-
-  // array for multiple co-applicants
   const [coApplicants, setCoApplicants] = useState([1]);
 
   const addCoapplicant = () => {
@@ -27,39 +23,67 @@ const ApplicationStage = () => {
   const submitAppDetails = () => {
     const applicantName = localStorage.getItem("applicantName");
     const applicantLoan = localStorage.getItem("loanAmount");
-    navigate("/dashboard", { state: { applicantName, applicantLoan } });
+    navigate("/dashboard", {
+      state: { applicantName, applicantLoan },
+    });
   };
 
   return (
-    <div>
-      <h1>Applications Stage</h1>
-      {urlApplicantId ? (
-        <>
-          <ApplicantDetails urlApplicantId={urlApplicantId} />
-          <br></br>
-          <CoApplicantDetails urlApplicantId={urlApplicantId} />
-        </>
-      ) : (
-        <ApplicantsForm
-          setFormStatus={setFormStatus}
-          setApplicantId={setApplicantId}
-        />
-      )}
+    <div className={styles.page}>
+      <div className={styles.formContainer}>
+        <h1 className={styles.heading}>Application Stage</h1>
 
-      {formStatus &&
-        coApplicants.map((item, index) => (
-          <CoApplicantForm
-            key={index}
-            applicantId={applicantId}
-            setCoAppFormStatus={setCoAppFormStatus}
-          />
-        ))}
+        {urlApplicantId ? (
+          <>
+            <div className={styles.sectionHeader}>Applicant Details</div>
+            <div className={styles.section}>
+              <ApplicantDetails urlApplicantId={urlApplicantId} />
+            </div>
 
-      {coAppFormStatus && (
-        <button onClick={addCoapplicant}>Add More Co-Applicant</button>
-      )}
+            <div className={styles.sectionHeader}>Co-Applicant Details</div>
+            <div className={styles.section}>
+              <CoApplicantDetails urlApplicantId={urlApplicantId} />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={styles.sectionHeader}>Applicant Details</div>
+            <div className={styles.section}>
+              <ApplicantsForm
+                setFormStatus={setFormStatus}
+                setApplicantId={setApplicantId}
+              />
+            </div>
+          </>
+        )}
 
-      <button onClick={submitAppDetails}>Submit Application Details</button>
+        {formStatus &&
+          coApplicants.map((item, index) => (
+            <React.Fragment key={index}>
+              <div className={styles.sectionHeader}>
+                Co-Applicant Form {coApplicants.length > 1 ? `#${index + 1}` : ""}
+              </div>
+              <div className={styles.section}>
+                <CoApplicantForm
+                  applicantId={applicantId}
+                  setCoAppFormStatus={setCoAppFormStatus}
+                />
+              </div>
+            </React.Fragment>
+          ))}
+      </div>
+
+      {/* Button container placed neatly right underneath the white card */}
+      <div className={styles.buttonContainer}>
+        {coAppFormStatus && (
+          <button className={styles.secondaryButton} onClick={addCoapplicant}>
+            Add More Co-Applicant
+          </button>
+        )}
+        <button className={styles.primaryButton} onClick={submitAppDetails}>
+          Submit Application Details
+        </button>
+      </div>
     </div>
   );
 };

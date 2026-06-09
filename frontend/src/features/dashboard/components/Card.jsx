@@ -1,26 +1,31 @@
-import React from "react";
+import styles from "./card.module.css";
 
-const Card = ({ title, loanAmount, onClick }) => {
+const Card = ({ title, loanAmount, userName, role, onClick }) => {
   return (
-    <div
-      onClick={onClick}
-      style={{
-        cursor: "pointer",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        padding: "15px",
-        margin: "10px 0",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-        backgroundColor: "#fff",
-        width: "250px",
-      }}
-    >
-      <div style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px" }}>
-        {title}
+    <div className={styles.card} onClick={onClick}>
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitle}>{title}</div>
+        <div className={styles.viewDetails}>View Details →</div>
       </div>
 
-      <div style={{ fontSize: "14px", color: "#555" }}>
-        Loan Amount: ₹{loanAmount}
+      <div className={styles.loanSection}>
+        <span className={styles.loanLabel}>Loan Amount</span>
+        <span className={styles.loanAmount}>
+          ₹{Number(loanAmount).toLocaleString("en-IN")}
+        </span>
+      </div>
+
+      <div className={styles.divider}></div>
+
+      {/* Structured and cleanly formatted user metadata footer */}
+      <div className={styles.userInfo}>
+        <div className={styles.userMeta}>
+          <span className={styles.metaLabel}>Created By</span>
+          <span className={styles.userName}>{userName || "N/A"}</span>
+        </div>
+        <span className={`${styles.roleBadge} ${styles[role] || ""}`}>
+          {role === "rm" ? "RM" : role === "superAdmin" ? "Super Admin" : "Admin"}
+        </span>
       </div>
     </div>
   );
