@@ -33,6 +33,9 @@ const DashboardHome = () => {
           "http://localhost:5000/api/loan/dashboard/totalApplicants-count",
           {
             method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
         );
 
@@ -46,9 +49,6 @@ const DashboardHome = () => {
         if (decoded?.role === "superAdmin") {
           setPermission(true);
         }
-
-
-
       } catch (error) {
         console.error(error);
       }
@@ -58,6 +58,9 @@ const DashboardHome = () => {
           "http://localhost:5000/api/loan/dashboard/applicantDetails",
           {
             method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
         );
 
@@ -87,8 +90,8 @@ const DashboardHome = () => {
   };
 
   const createUser = () => {
-    navigate("/dashboard/create-user")
-  }
+    navigate("/dashboard/create-user");
+  };
 
   return (
     <div>

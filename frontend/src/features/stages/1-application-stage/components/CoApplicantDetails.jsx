@@ -3,23 +3,44 @@ import React, { useEffect, useState } from "react";
 const CoApplicantDetails = ({ urlApplicantId }) => {
   const [fetchCoApplicantDetails, setFetchCoApplicantDetails] = useState([]);
   const [fetchCoApplicantCount, setFetchCoApplicantCount] = useState(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const token = user?.token;
+  
   useEffect(() => {
     const fetchDetails = async () => {
-      const response = await fetch(
-        `http://localhost:5000/api/loan/co-applicant/${urlApplicantId}`,
-        {
-          method: "GET",
-        },
-      );
-      const data = await response.json();
-      const coApplicant = data.coApplicant;
-      const coApplicantCount = data.coApplicantCount;
-      setFetchCoApplicantCount(coApplicantCount);
-      setFetchCoApplicantDetails(coApplicant);
-      console.log(coApplicant);
+      try {
+        console.log("before CoApplicant token:", token);
+        console.log("CoApplicant ID:", urlApplicantId);
+
+        if (!urlApplicantId) return;
+
+        const response = await fetch(
+          `http://localhost:5000/api/loan/co-applicant/${urlApplicantId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const data = await response.json();
+
+        console.log("API Response:", data);
+
+        const coApplicant = data.coApplicant;
+        const coApplicantCount = data.coApplicantCount;
+
+        setFetchCoApplicantCount(coApplicantCount);
+        setFetchCoApplicantDetails(coApplicant);
+      } catch (error) {
+        console.error("Error fetching co-applicant:", error);
+      }
     };
+
     fetchDetails();
-  }, []);
+  }, [urlApplicantId, token]);
   return (
     <div>
       {fetchCoApplicantDetails.map((coApplicant, index) => {

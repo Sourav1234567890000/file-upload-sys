@@ -36,6 +36,6 @@ router.get("/loan/dashboard/applicantDetails", verifyToken,  getApplicantDetails
 
 router.get("/loan/applicant/:applicantId", verifyToken,  getApplicant);
 
-router.get("/loan/co-applicant/:applicantId", getCoApplicant);
+router.get("/loan/co-applicant/:applicantId", verifyToken,  getCoApplicant);
 
 module.exports = router;
