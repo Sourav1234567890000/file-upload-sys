@@ -1,22 +1,142 @@
+/* =========================
+   GLOBAL BASE
+========================= */
+
 body {
   margin: 0;
-  background: #f8fafc;
   font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 button {
   cursor: pointer;
 }
 
+/* ensure full app height coverage */
+html, body, #root {
+  height: 100%;
+}
+
+/* =========================
+   LIGHT THEME (DEFAULT)
+========================= */
+
 :root {
-  /* The precise teal-green from the screenshot button */
-  --primary-brand: #009ba4; 
-  --primary-brand-hover: #00848c;
-  
-  /* The dark blue-slate used for section headers */
-  --section-bg: #2b7ea1; 
-  
-  /* Background frames */
-  --frame-bg: #555555;
+  --bg: #f8fafc;
+  --text: #0f172a;
+
   --card-bg: #ffffff;
+  --frame-bg: #555555;
+
+  --primary-brand: #009ba4;
+  --primary-brand-hover: #00848c;
+
+  --section-bg: #2b7ea1;
+
+  --border: #e5e7eb;
+}
+
+/* =========================
+   DARK THEME
+========================= */
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+
+  --card-bg: #111827;
+  --frame-bg: #1f2937;
+
+  --primary-brand: #22c1c3;
+  --primary-brand-hover: #1aa6a8;
+
+  --section-bg: #1e3a8a;
+
+  --border: #2d3748;
+}
+
+/* =========================
+   GLOBAL ELEMENT STYLES
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* optional: smooth theme transition globally */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --text: #e5e7eb;
+}
+
+/* TEMPORARY TEST */
+[data-theme="dark"] body {
+  background: red !important;
+}
+
+html[data-theme="dark"] {
+  background: red !important;
+}
+
+html[data-theme="dark"] body {
+  background: red !important;
+}
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --text: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border: #334155;
+}
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+
+  --primary-brand: #009ba4;
+  --primary-brand-hover: #00848c;
+
+  --sidebar-bg: #0f172a;
+  --sidebar-text: #ffffff;
+  --sidebar-muted: #94a3b8;
+  --sidebar-border: #1e293b;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --surface: #1e293b;
+  --text: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border: #334155;
+
+  --primary-brand: #009ba4;
+  --primary-brand-hover: #00848c;
+
+  --sidebar-bg: #020617;
+  --sidebar-text: #ffffff;
+  --sidebar-muted: #94a3b8;
+  --sidebar-border: #1e293b;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CoApplicantDetails from "./CoApplicantDetails";
+import styles from "./applicantDetails.module.css";
 
 const ApplicantDetails = ({ urlApplicantId }) => {
   const [fetchApplicantDetails, setFetchApplicantDetails] = useState({});
@@ -17,69 +17,45 @@ const ApplicantDetails = ({ urlApplicantId }) => {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         );
+
         const data = await response.json();
-        const applicant = data.applicant;
-        setFetchApplicantDetails(applicant);
-        console.log(applicant);
+        setFetchApplicantDetails(data.applicant);
       };
+
       fetchDetails();
     }
-  }, []);
+  }, [urlApplicantId, token]);
 
   const fields = [
     { label: "First Name", value: fetchApplicantDetails.firstName },
     { label: "Middle Name", value: fetchApplicantDetails.middleName },
     { label: "Last Name", value: fetchApplicantDetails.lastName },
-    { label: "Pan Number", value: fetchApplicantDetails.panNumber },
-    { label: "Aadhar Number", value: fetchApplicantDetails.aadhaarNumber },
+    { label: "PAN Number", value: fetchApplicantDetails.panNumber },
+    { label: "Aadhaar Number", value: fetchApplicantDetails.aadhaarNumber },
     { label: "Email", value: fetchApplicantDetails.email },
   ];
 
-  return (
-    <>
-      <div style={styles.container}>
-        <h2>Applicant details : {fetchApplicantDetails.firstName}</h2>
-        {fields.map((field, index) => (
-          <div key={index} style={styles.row}>
-            <span style={styles.label}>{field.label}</span>
-            <span style={styles.value}>{field.value}</span>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
+ return (
+  <div className={styles.container}>
+    <div className={styles.header}>
+      <h2 className={styles.heading}>Applicant Details</h2>
+      <span className={styles.badge}>
+        {fetchApplicantDetails.firstName} {fetchApplicantDetails.lastName}
+      </span>
+    </div>
 
-const styles = {
-  container: {
-    width: "60%",
-    padding: "16px",
-    border: "1px solid #e5e7eb",
-    borderRadius: "10px",
-    backgroundColor: "#ffffff",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-  },
-
-  row: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "12px 0",
-    borderBottom: "1px solid #f1f1f1",
-  },
-
-  label: {
-    fontWeight: "600",
-    color: "#374151",
-    width: "40%",
-  },
-
-  value: {
-    color: "#111827",
-    width: "60%",
-    textAlign: "right",
-  },
+    <div className={styles.grid}>
+      {fields.map((field, index) => (
+        <div key={index} className={styles.fieldCard}>
+          <label className={styles.label}>{field.label}</label>
+          <div className={styles.value}>{field.value || "-"}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
 };
 
 export default ApplicantDetails;

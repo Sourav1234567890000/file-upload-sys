@@ -1,7 +1,7 @@
 /* Container layout matching the dark backdrop wrap + light form container */
 .page {
   min-height: 100vh;
-  background-color: #555555; /* The dark frame color in your screenshot */
+  background-color: var(--frame-bg);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -11,28 +11,28 @@
 
 /* Main form wrapper */
 .formContainer {
-  background: #ffffff;
+  background: var(--surface);
   width: 100%;
   max-width: 1100px;
   padding: 20px 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
+  color: var(--text);
 }
 
-/* Replaces the oversized H1 with a clean section header if needed, 
-   or keep it hidden depending on how the image looks */
+/* Replaces the oversized H1 with a clean section header */
 .heading {
   font-size: 22px;
   font-weight: bold;
-  color: #1f6b8a;
+  color: var(--section-bg);
   margin-bottom: 20px;
-  border-bottom: 2px solid #1f6b8a;
+  border-bottom: 2px solid var(--section-bg);
   padding-bottom: 5px;
 }
 
-/* The iconic blue bar sections from your screenshot */
+/* Section headers */
 .sectionHeader {
-  background: #2b7ea1;
+  background: var(--section-bg);
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
@@ -45,10 +45,10 @@
 
 .section {
   margin-bottom: 20px;
-  background: #ffffff;
+  background: var(--surface);
 }
 
-/* Button Container pinned to bottom-left outside or inside the frame */
+/* Button Container */
 .buttonContainer {
   display: flex;
   gap: 15px;
@@ -58,9 +58,9 @@
   justify-content: flex-start;
 }
 
-/* Exact replica of the "Submit Application Details" button styling */
+/* Primary Button */
 .primaryButton {
-  background: #2563eb;
+  background: var(--primary-brand);
   color: #ffffff;
   border: none;
   padding: 10px 24px;
@@ -73,14 +73,14 @@
 }
 
 .primaryButton:hover {
-  background: #1d4ed8;
+  background: var(--primary-brand-hover);
 }
 
-/* Secondary Button matching scheme */
+/* Secondary Button */
 .secondaryButton {
-  background: #ffffff;
-  color: #2b7ea1;
-  border: 1px solid #2b7ea1;
+  background: var(--surface);
+  color: var(--section-bg);
+  border: 1px solid var(--section-bg);
   padding: 10px 24px;
   border-radius: 6px;
   cursor: pointer;
@@ -90,5 +90,20 @@
 }
 
 .secondaryButton:hover {
-  background: #f0f7fa;
+  background: var(--bg);
 }
+
+
+/* 
+A shortcut for the rest of your project: whenever you see a hardcoded color, replace it with:
+
+White backgrounds → var(--surface)
+Page backgrounds → var(--bg)
+Text → var(--text)
+Borders → var(--border)
+Brand teal → var(--primary-brand)
+Section bars → var(--section-bg)
+
+After a few files, converting the rest of the app becomes very fast
+
+*/

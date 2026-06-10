@@ -4,6 +4,8 @@ import DashboardHome from "./features/dashboard/pages/DashboardHome";
 import FormState from "./components/practice/FormState";
 import ApplicationStage from "./features/stages/1-application-stage/pages/ApplicationStage";
 import CreateUser from "./features/user-management/pages/CreateUser";
+import { ThemeProvider } from "./context/ThemeContext";
+import ThemeToggleButton from "./components/ThemeToggleButton";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +32,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <RouterProvider router={router}></RouterProvider>
-    </>
+      <ThemeToggleButton/>
+    </ThemeProvider>
   );
 }
 export default App;

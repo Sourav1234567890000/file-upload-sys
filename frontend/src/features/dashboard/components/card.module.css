@@ -1,11 +1,12 @@
 .card {
-  background: #ffffff;
+  background: var(--surface);
   border-radius: 12px;
   padding: 20px;
   min-height: 150px;
   cursor: pointer;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+              0 2px 4px -1px rgba(0, 0, 0, 0.03);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
@@ -13,8 +14,9 @@
 
 .card:hover {
   transform: translateY(-4px);
-  border-color: #009ba4; /* Highlights card frame with your global brand teal-green */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary-brand);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 .cardHeader {
@@ -27,14 +29,14 @@
 .cardTitle {
   font-size: 18px;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text);
   text-transform: capitalize;
 }
 
 .viewDetails {
   font-size: 12px;
   font-weight: 600;
-  color: #009ba4; /* Global theme color transition */
+  color: var(--primary-brand);
   opacity: 0;
   transform: translateX(-5px);
   transition: all 0.2s ease;
@@ -57,25 +59,23 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .loanAmount {
   font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
-/* Crisp internal separator line */
 .divider {
   height: 1px;
-  background: #f1f5f9;
+  background: var(--border);
   width: 100%;
   margin-top: auto;
   margin-bottom: 12px;
 }
 
-/* User information strip at base */
 .userInfo {
   display: flex;
   justify-content: space-between;
@@ -89,29 +89,28 @@
 
 .metaLabel {
   font-size: 10px;
-  color: #94a3b8;
+  color: var(--text-secondary);
   text-transform: uppercase;
 }
 
 .userName {
   font-size: 13px;
   font-weight: 600;
-  color: #334155;
+  color: var(--text);
   text-transform: capitalize;
 }
 
-/* Role badge pills */
 .roleBadge {
   font-size: 11px;
   font-weight: 600;
   padding: 3px 8px;
   border-radius: 20px;
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--bg);
+  color: var(--text-secondary);
   text-transform: capitalize;
 }
 
-/* Dynamic situational color modifiers matching user roles */
+/* Role badge pills */
 .roleBadge.superAdmin {
   background: #fee2e2;
   color: #dc2626;

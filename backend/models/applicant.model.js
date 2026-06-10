@@ -6,7 +6,7 @@ Without it: anyone could store garbage data in your database.
 With it: only valid loan application data gets stored.
 */
 
-const loanApplicationSchema = new mongoose.Schema({
+const applicantSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -62,6 +62,16 @@ const loanApplicationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    enum: [
+      "pending",
+      "Prinicipal_insanction_completed",
+      "login_fee_completed",
+      "business_verified",
+      "checklist_completed",
+      "cm_review",
+      "approved",
+      "rejected",
+    ],
     default: "pending",
   },
   statementUploaded: {
@@ -84,4 +94,4 @@ Model = the actual class you use to create, read, update, delete records
 
 Without this line you have a blueprint but no way to use it. This line connects the two. */
 
-module.exports = mongoose.model("applicant", loanApplicationSchema);
+module.exports = mongoose.model("applicant", applicantSchema);
