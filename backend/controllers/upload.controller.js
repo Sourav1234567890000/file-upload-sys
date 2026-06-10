@@ -1,6 +1,6 @@
 const csvParser = require("../services/csvParser");
 const fileValidator = require("../services/fileValidator");
-const LoanApplication = require("../models/applicant.model");
+const LoanApplication = require("../src/modules/applicant/applicant.model");
 
 const uploadFile = async (req, res) => {
   try {

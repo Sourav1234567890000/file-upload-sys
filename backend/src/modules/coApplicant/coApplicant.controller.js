@@ -1,5 +1,5 @@
-const applicantModel = require("../models/applicant.model");
-const coApplicantModel = require("../models/co-applicant.model");
+const applicantModel = require("../applicant/applicant.model");
+const coApplicantModel = require("./co-applicant.model");
 
 const registerCoApplicant = async (req, res) => {
   try {
