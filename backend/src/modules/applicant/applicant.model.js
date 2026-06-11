@@ -84,6 +84,19 @@ const applicantSchema = new mongoose.Schema({
     ref: "user",
     required: true,
   },
+  currentStage: {
+    type: String,
+    enum: [
+      "application",
+      "login_fee",
+      "business_verification",
+      "checklist",
+      "cm_review",
+      "approved",
+      "rejected",
+    ],
+    default: "application",
+  },
 });
 
 /*mongoose.model() takes your schema and creates a Model — which is the actual tool you use to interact with the database.
